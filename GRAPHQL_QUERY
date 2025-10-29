@@ -1,0 +1,107 @@
+CREATE Task:
+mutation {
+  createTask(
+    input: {
+      title: "Build GraphQL API"
+      description: "Implement CRUD operations using GraphQL and Mongoose"
+      status: "TODO"
+      dueDate: "2025-11-10"
+      priority: "HIGH"
+      tags: ["GraphQL", "API", "NodeJS"]
+      category: "Development"
+      estimatedHours: "10"
+      createdBy: "Vijay"
+      assignedTo: "Shan"
+      reviewer: "Manager"
+      team: ["Dev1", "Dev2"]
+      isRecurring: false
+      recurrencePattern: "WEEKLY"
+    }
+  ) {
+    id
+    title
+    status
+    priority
+    createdAt
+  }
+}
+----------------------------------------------------------------------------------------------------------------------------------------
+2.Read:
+
+
+{
+  tasks {
+    id
+    title
+    status
+    dueDate
+    priority
+    createdBy
+  }
+}
+-------------------------------------------------------------------------------------------------------------------------------------
+
+3.READ (Fetch Single Task by ID)
+
+{
+  task(id: "671d59e7a6f79f00247e3339") {
+    id
+    title
+    description
+    status
+    dueDate
+    createdBy
+    assignedTo
+    comments {
+      user
+      text
+    }
+  }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+4.Update task:
+
+mutation {
+  updateTask(
+    id: "671d59e7a6f79f00247e3339"
+    input: {
+      title: "Build GraphQL API v2"
+      description: "Added mutation for comments and history log"
+      status: "IN_PROGRESS"
+      dueDate: "2025-11-15"
+      priority: "CRITICAL"
+      tags: ["GraphQL", "Update"]
+      category: "Backend"
+      progress: "60"
+      assignedTo: "Shan"
+    }
+  ) {
+    id
+    title
+    status
+    priority
+    progress
+  }
+}
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+5.PATCH Task Status (Partial Update)
+
+mutation {
+  patchTaskStatus(id: "671d59e7a6f79f00247e3339", status: "DONE") {
+    id
+    title
+    status
+    completedAt
+  }
+}
+------------------------------------------------------------------------------------------------------------------------------------
+
+6.Delete Task:
+
+mutation {
+  deleteTask(id: "671d59e7a6f79f00247e3339")
+}
